@@ -1,0 +1,91 @@
+{
+  "info": {
+    "name": "TaskFlow API",
+    "description": "TaskFlow görev yönetim API'si için CRUD istekleri. Sunucuyu npm start ile başlattıktan sonra sırayla çalıştırın.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" }
+  ],
+  "item": [
+    {
+      "name": "1 - Görev Ekle (POST)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Kullanıcı profili sayfası\",\n  \"description\": \"Profil bilgilerini düzenleme ekranı yapılacak.\",\n  \"status\": \"pending\",\n  \"priority\": \"high\",\n  \"assignee\": \"Edanur Çelik\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/tasks", "host": ["{{baseUrl}}"], "path": ["tasks"] }
+      }
+    },
+    {
+      "name": "2 - Görevleri Listele (GET)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/tasks", "host": ["{{baseUrl}}"], "path": ["tasks"] }
+      }
+    },
+    {
+      "name": "3 - Görev Detayı (GET by id)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/tasks/6", "host": ["{{baseUrl}}"], "path": ["tasks", "6"] }
+      }
+    },
+    {
+      "name": "4 - Görev Güncelle (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Kullanıcı profili sayfası\",\n  \"description\": \"Profil düzenleme ekranı tamamlandı.\",\n  \"status\": \"completed\",\n  \"priority\": \"medium\",\n  \"assignee\": \"Edanur Çelik\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/tasks/6", "host": ["{{baseUrl}}"], "path": ["tasks", "6"] }
+      }
+    },
+    {
+      "name": "5 - Görev Sil (DELETE)",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "{{baseUrl}}/tasks/6", "host": ["{{baseUrl}}"], "path": ["tasks", "6"] }
+      }
+    },
+    {
+      "name": "Ek - Filtreleme (?status=pending)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/tasks?status=pending",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"],
+          "query": [{ "key": "status", "value": "pending" }]
+        }
+      }
+    },
+    {
+      "name": "Ek - Hatalı İstek (400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"\",\n  \"priority\": \"acil\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/tasks", "host": ["{{baseUrl}}"], "path": ["tasks"] }
+      }
+    },
+    {
+      "name": "Ek - Olmayan Görev (404)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/tasks/999", "host": ["{{baseUrl}}"], "path": ["tasks", "999"] }
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "taskflow-api",
+  "version": "1.0.0",
+  "description": "Görev ve proje yönetim sistemi için REST API",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [
+    "express",
+    "rest-api",
+    "task"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
